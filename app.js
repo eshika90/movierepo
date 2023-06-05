@@ -1,6 +1,6 @@
 // TMDB 사용, API-key
 const API_KEY = 'api_key=c703ff1b12d45ab110c95c4b764b4a52'
-const base_URL = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&'
+const base_URL = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&'
 const API_URL = base_URL + API_KEY
 // 과제 페이지에 나온 것처럼 authorization을 그대로 따와서 받으면 자꾸 API-KEY가 누락됐다고 나와서 안에 있는 데이터를 볼 수가 없어
 // 그냥 URL에 api_key를 넣고 url을 볼 수 있도록 하고 변수선언을 했다.
