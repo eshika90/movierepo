@@ -13,7 +13,7 @@ fetch(movieURL)
         const roundedVote = vote_average.toFixed(1);
 
         // 가져온 정보로 HTML 요소 채우기
-        document.getElementById('movie').innerHTML = `<img src="${IMG_URL + poster_path}" alt="${title}">`;
+        document.getElementById('movie').src = `${IMG_URL + poster_path}`;
         document.getElementById('title').textContent = title;
         document.getElementById('overview').textContent = overview;
         document.getElementById('vote').textContent = `Vote Average: ${roundedVote}`;
@@ -21,6 +21,8 @@ fetch(movieURL)
 
 // 받아온 데이터를 보여주기 위한 함수
 function fetchMovieDetails(movie) {
+    // 기존 영화 목록을 숨김.
+    document.getElementById('movies').style.display = 'none';
 
     const { title, poster_path, overview, vote_average } = movie;
     const roundedVote = vote_average.toFixed(1);
@@ -39,5 +41,6 @@ function fetchMovieDetails(movie) {
 
     // 영화 상세 정보를 main 요소에 추가.
     const main = document.getElementById('main');
+    main.innerHTML = '';
     main.appendChild(movieDetailEl);
 }
