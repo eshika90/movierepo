@@ -1,43 +1,92 @@
 // URL 쿼리 파라미터에서 movieId 가져오기
 const urlParams = new URLSearchParams(window.location.search);
-const movieId = urlParams.get('id');
-
+const movieId = urlParams.get("id");
+// TMDB에서 제공하는 검색기능 사용하는 방법 base URL
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
 // 상세 정보를 가져오기 위한 API 호출
-const API_KEY = 'api_key=c703ff1b12d45ab110c95c4b764b4a52';
+const API_KEY = "api_key=c703ff1b12d45ab110c95c4b764b4a52";
 const movieURL = `https://api.themoviedb.org/3/movie/${movieId}?${API_KEY}&language=en-US`;
-
 fetch(movieURL)
-    .then(res => res.json())
-    .then(data => {
-        const { title, poster_path, overview, vote_average } = data;
-        const roundedVote = vote_average.toFixed(1);
-
-        // 가져온 정보로 HTML 요소 채우기
-        document.getElementById('movie').innerHTML = `<img src="${IMG_URL + poster_path}" alt="${title}">`;
-        document.getElementById('title').textContent = title;
-        document.getElementById('overview').textContent = overview;
-        document.getElementById('vote').textContent = `Vote Average: ${roundedVote}`;
-    });
+  .then((res) => res.json())
+  .then((data) => {
+    const { title, poster_path, overview, vote_average } = data;
+    const roundedVote = vote_average.toFixed(1);
+    // 가져온 정보로 HTML 요소 채우기
+    document.getElementById("movie").innerHTML = `<img src="${IMG_URL + poster_path}" alt="${title}">`;
+    document.getElementById("title").textContent = title;
+    document.getElementById("overview").textContent = overview;
+    document.getElementById("vote").textContent = `Vote Average: ${roundedVote}`;
+  });
 
 // 받아온 데이터를 보여주기 위한 함수
 function fetchMovieDetails(movie) {
+  const { title, poster_path, overview, vote_average } = movie;
+  const roundedVote = vote_average.toFixed(1);
 
-    const { title, poster_path, overview, vote_average } = movie;
-    const roundedVote = vote_average.toFixed(1);
+  // 영화 상세 정보를 표시하는 요소를 생성
+  const movieDetailEl = document.createElement("div");
+  movieDetailEl.classList.add("movie-detail");
 
-    // 영화 상세 정보를 표시하는 요소를 생성
-    const movieDetailEl = document.createElement('div');
-    movieDetailEl.classList.add('movie-detail');
-
-    // 영화 상세 정보를 사용하여 요소를 구성
-    movieDetailEl.innerHTML = `
+  // 영화 상세 정보를 사용하여 요소를 구성
+  movieDetailEl.innerHTML = `
         <img src="${IMG_URL + poster_path}" alt="${title}">
         <h2>${title}</h2>
         <p>${overview}</p>
         <p>Vote Average: ${roundedVote}</p>
     `;
 
-    // 영화 상세 정보를 main 요소에 추가.
-    const main = document.getElementById('main');
-    main.appendChild(movieDetailEl);
+  // 영화 상세 정보를 main 요소에 추가.
+  const main = document.getElementById("main");
+  main.appendChild(movieDetailEl);
 }
+
+const reviewForm = document.querySelector(".reviews form");
+const submitButton = document.querySelector(".reviews .submit");
+const reviewList = document.getElementById("review_list");
+// review 저장 시 localStorage 추가
+
+const createReview = (data) => {
+  const originalData = JSON.parse(localStorage.getItem(movieId) || "[]");
+
+  originalData.push(data);
+
+  localStorage.setItem(movieId, JSON.stringify(originalData));
+
+  updateReviewList();
+};
+// review list 업데이트
+const updateReviewList = () => {
+  const newData = JSON.parse(localStorage.getItem(movieId) || "[]");
+
+  if (newData.length === 0) return;
+  console.log(newData);
+  reviewList.innerHTML = `
+    <h2>리뷰</h2>
+    ${newData
+      .map(
+        (el, index) =>
+          `<div>
+          <span><작성자></span><div>${el.title}</div>
+          <span><리뷰내용></span><div>${el.contents}</div>
+          <button>수정</button>
+          <button>삭제</button>
+          <br/>
+        </div>`
+      )
+      .join("")}
+  `;
+};
+submitButton.addEventListener("click", () => {
+  event.preventDefault();
+  const data = new FormData(reviewForm);
+  const formDataObj = {};
+  data.forEach((value, key) => (formDataObj[key] = value));
+  console.log(formDataObj, "reviewForm");
+
+  createReview(formDataObj);
+});
+
+const reviewsContents = localStorage.getItem("movieId");
+
+// 처음 접속시 리뷰 리스트 조회
+updateReviewList();
