@@ -40,12 +40,18 @@ function fetchMovieDetails(movie) {
   main.appendChild(movieDetailEl);
 }
 
+// dom
 const reviewForm = document.querySelector(".reviews form");
 const submitButton = document.querySelector(".reviews .submit");
 const reviewList = document.getElementById("review_list");
+const modalEl = document.querySelector(".modal");
+const modalSubmitBtn = document.querySelector(".modal .submit");
+const modalCancelBtn = document.querySelector(".modal .cancel");
+const modalInput = document.querySelector(".modal input");
+let selectedReviewIndex;
+let isDeleteModal;
 // review 저장 시 localStorage 추가
-
-const createReview = (data) => {
+const createLocalStorage = (data) => {
   const originalData = JSON.parse(localStorage.getItem(movieId) || "[]");
 
   originalData.push(data);
@@ -54,36 +60,128 @@ const createReview = (data) => {
 
   updateReviewList();
 };
+
 // review list 업데이트
 const updateReviewList = () => {
   const newData = JSON.parse(localStorage.getItem(movieId) || "[]");
 
   if (newData.length === 0) return;
-  console.log(newData);
   reviewList.innerHTML = `
-    <h2>리뷰</h2>
-    ${newData
-      .map(
-        (el, index) =>
-          `<div>
+      <h2>리뷰</h2>
+      ${newData
+        .map((el, index) =>
+          el.isUpdate
+            ? `
+          <div>
+          <span><작성자></span><div>${el.title}</div>
+          <span><리뷰내용></span><textarea id="edit_text">${el.contents}</textarea>
+          <button id="edit_submit" name="${index}" >확인</button>
+          <button id="edit_cancel" name="${index}" >취소</button>
+          <br/>
+        </div>
+          `
+            : `
+        <div>
           <span><작성자></span><div>${el.title}</div>
           <span><리뷰내용></span><div>${el.contents}</div>
-          <button>수정</button>
-          <button>삭제</button>
+          <button class="review_update" name="${index}">수정</button>
+          <button class="review_delete" name="${index}">삭제</button>
           <br/>
-        </div>`
-      )
-      .join("")}
-  `;
+        </div>
+        `
+        )
+        .join("")}
+    `;
+  const reviewUpdateBtn = document.querySelectorAll(".review_update");
+  const reviewDeleteBtn = document.querySelectorAll(".review_delete");
+  const editInput = document.getElementById("edit_text");
+  const editSubmit = document.getElementById("edit_submit");
+  const editCancel = document.getElementById("edit_cancel");
+
+  if (editCancel) {
+    editCancel.addEventListener("click", (e) => {
+      const index = e.target.name;
+      const target = JSON.parse(localStorage.getItem(movieId));
+
+      target[index].isUpdate = false;
+      localStorage.setItem(movieId, JSON.stringify(target));
+      updateReviewList();
+    });
+  }
+  if (editSubmit) {
+    editSubmit.addEventListener("click", (e) => {
+      const index = e.target.name;
+      const target = JSON.parse(localStorage.getItem(movieId));
+      target[index].isUpdate = false;
+      target[index].contents = editInput.value;
+
+      localStorage.setItem(movieId, JSON.stringify(target));
+      updateReviewList();
+    });
+  }
+  reviewUpdateBtn.forEach((el) => {
+    const name = el.name;
+
+    el.addEventListener("click", function (event) {
+      openModal();
+      selectedReviewIndex = Number(el.name);
+      isDeleteModal = false;
+    });
+  });
+  reviewDeleteBtn.forEach((el) => {
+    el.addEventListener("click", function (event) {
+      openModal();
+      selectedReviewIndex = Number(el.name);
+      isDeleteModal = true;
+    });
+  });
 };
+
+const openModal = () => {
+  modalEl.style.display = "block";
+};
+const closeModal = () => {
+  modalEl.style.display = "none";
+};
+const deleteLocalStorage = () => {};
+
+const checkPassword = (value) => {
+  const target = JSON.parse(localStorage.getItem(movieId));
+  // 비밀번호 틀렸을때
+  if (value !== target[selectedReviewIndex].password) return alert("비밀번호를 확인해주세요");
+  closeModal();
+  // 삭제
+  if (isDeleteModal) {
+    target.splice(selectedReviewIndex, 1);
+
+    localStorage.setItem(movieId, JSON.stringify(target));
+    updateReviewList();
+    modalInput.value = "";
+    alert("삭제되었습니다");
+  }
+  // 수정
+  else {
+    target[selectedReviewIndex].isUpdate = true;
+    localStorage.setItem(movieId, JSON.stringify(target));
+    modalInput.value = "";
+    updateReviewList();
+  }
+};
+
+modalSubmitBtn.addEventListener("click", (e) => {
+  checkPassword(modalInput.value);
+});
+modalCancelBtn.addEventListener("click", (e) => {
+  closeModal();
+  modalInput.value = "";
+});
 submitButton.addEventListener("click", () => {
   event.preventDefault();
   const data = new FormData(reviewForm);
   const formDataObj = {};
   data.forEach((value, key) => (formDataObj[key] = value));
-  console.log(formDataObj, "reviewForm");
 
-  createReview(formDataObj);
+  createLocalStorage(formDataObj);
 });
 
 const reviewsContents = localStorage.getItem("movieId");
