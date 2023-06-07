@@ -31,31 +31,40 @@ function getMovies(url) {
 }
 
 // 받아온 데이터를 보여주기 위한 함수 (웹종에서 했던 서버에서 POST방식)
+// 받아온 데이터를 보여주기 위한 함수
 function showMovies(data) {
-  main.innerHTML = ""; // 이렇게 하면 원래 설정해놨던 값이 빈 공간으로 만들 수 있다.
+  main.innerHTML = '';
 
-  data.forEach((movie) => {
-    const { title, poster_path, overview, vote_average, id } = movie; // 이렇게 하면 각 property들을 일일이 선언해주지 않아도 됨, 아래 classList에 들어감
-    const roundedVote = vote_average.toFixed(1); // 평점을 소숫점 첫번째로 바꿔주는 변수(안바꿔주면 7.123 <이렇게 지저분하게 보이는 게 발생)
-    const movieEl = document.createElement("div");
-    movieEl.classList.add("movie"); //  위의 상수를 받아 classList로 설계해서 추가 / 아래는 innerHTML은 html에 요소들을 붙여넣는 작업 .
-    // 아래 이미지는 console.log로 확인해보면 url이 아니고 경로만 나와있다. 공통된 IMG_URL에 경로를 붙이면 이미지가 업로드 되는것이 확인됨
-    // 대체 이미지는 그냥 타이틀이 나오도록 설정
-    // 포스터를 클릭 시 영화의 id가 뜨도록 설정 -> onclick 안에 큰따옴표와 alert안에 소괄호, 작은따옴표를 주의해서 적을 것!
-    movieEl.innerHTML = `<img src="${
-      IMG_URL + poster_path
-    }" alt="${title}" onclick= "alert('movie id=${id}')">
-                        <div class="movie-info">
-                            <h3>${title}</h3>
-                            <span class="score">${roundedVote}</span>
-                        </div>
+  data.forEach(movie => {
+    const { title, poster_path, overview, vote_average, id } = movie;
+    const roundedVote = vote_average.toFixed(1);
+    const movieEl = document.createElement('div');
+    movieEl.classList.add('movie');
+    const movieImg = document.createElement('img');
+    movieImg.src = `${IMG_URL+poster_path}`;
+    movieImg.alt = title;
+    movieImg.addEventListener('click', () => {
+      newPage(id);
+    });
+    const movieInfo = document.createElement('div');
+    movieInfo.classList.add('movie-info');
+    movieInfo.innerHTML = `
+      <h3>${title}</h3>
+      <span class="score">${roundedVote}</span>
+    `;
+    const description = document.createElement('div');
+    description.classList.add('description');
+    description.textContent = overview;
 
-                        <div class="description">
-                            ${overview}
-                        </div>`;
-    main.appendChild(movieEl); //부모 Class로부터 상속받아서 붙인다.
-  });
+    movieEl.appendChild(movieImg);
+    movieEl.appendChild(movieInfo);
+    movieEl.appendChild(description);
+
+    main.appendChild(movieEl);
+  })
 }
+
+
 
 // 검색 기능 구현하는 함수
 form.addEventListener("submit", (e) => {
@@ -70,6 +79,11 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-function Title() {
-  window.location.reload();
+  if(searchInput) { // 검색어가 존재하면
+    getMovies(searchURL+'&query='+searchInput) // 검색 매개변수를 받아 TMDB에서 받은 search할 수 있는 기능의 URL을 받아 검색 결과가 나오게해준다.
+  } 
+})
+
+function newPage(movieId) {
+  window.open(`detail.html?id=${movieId}`);
 }
