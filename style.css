@@ -1,100 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap");
+
 /* 박스 크기를 균일하게 유지하게 해주는 속성; border-box : 보더 패딩 다 합친 크기 */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* :root에서 꺼내서 색을 고정해서 꺼내쓸 수 있다(변수 선언처럼) */
 :root {
-    --first-color: white;
-    --second-color: rgb(61 162 136);
+  --first-color: white;
+  --second-color: rgb(61 162 136);
 }
 
 body {
-    background-color: var(--first-color);
-    font-family: 'Lobster Two', cursive;
-    margin: 0;
+  background-color: var(--first-color);
+  font-family: "Lobster Two", cursive;
+  margin: 0;
 }
+
 /* 사이트 이름 + 검색창부분 */
 header {
-    padding: 0 0 15px 0;
-    display: column;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    /* 안에 요소들 가운데 정렬 */
-    border-bottom: 1px solid var(--second-color);
-    /* 헤더 초록색 선으로 분리 */
+  padding: 0 0 15px 0;
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  /* 안에 요소들 가운데 정렬 */
+  border-bottom: 1px solid var(--second-color);
+  /* 헤더 초록색 선으로 분리 */
 }
 
 /* 검색창 CSS */
 .search {
-    border: 1px solid rgb(240 241 242);
-    background-color: rgb(246 245 247);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-family: 'Lobster', cursive;
+  border: 1px solid rgb(240 241 242);
+  background-color: rgb(246 245 247);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: "Lobster", cursive;
 }
 
 .searchBtn {
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
 }
 
 /* 포스터 div css */
 .main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 /* 포스트 묶음 자체 크기 */
 .movie {
-    width: 300px;
-    margin: 1rem;
-    border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-    /* 그림자 추가 */
-    position: relative;
-    overflow: hidden;
+  width: 300px;
+  margin: 1rem;
+  border-radius: 3px;
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+  /* 그림자 추가 */
+  position: relative;
+  overflow: hidden;
 }
+
 /* 포스터 이미지 */
 .movie img {
-    width: 100%
+  width: 100%;
 }
 
 /* 영화 제목 */
 .movie-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0 20px;
 }
 
 /* 평점 */
 .movie-info span {
-    background-color: var(--second-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 100px;
-    color: var(--first-color);
-    margin: 0 20px 0 0;
+  background-color: var(--second-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 100px;
+  color: var(--first-color);
+  margin: 0 20px 0 0;
 }
+
 /* 줄거리 부분*/
 .description {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 1rem;
-    max-height: 100%;
-    background-color: var(--first-color);
-    /* 여기를 안넣으면 줄거리 부분이 뒤에 포스터배경색이랑 똑같아져서 안보이게 된다 */
-    transform: translateY(100%);
-    /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 %는 들어갔다나갔다하는 속도 */
-    transition: transform 0.3s ease-in;
-    /* 줄거리 부분이 내려가는 속도 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  max-height: 100%;
+  background-color: var(--first-color);
+  /* 여기를 안넣으면 줄거리 부분이 뒤에 포스터배경색이랑 똑같아져서 안보이게 된다 */
+  transform: translateY(100%);
+  /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 %는 들어갔다나갔다하는 속도 */
+  transition: transform 0.3s ease-in;
+  /* 줄거리 부분이 내려가는 속도 */
 }
 
 .movie:hover .description {
-    transform:translate(0);
-    /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 이게 없으면 줄거리 아예안나옴 */
+  transform: translate(0);
+  /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 이게 없으면 줄거리 아예안나옴 */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal div {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* // 댓글 스타일 */
+.comments {
+  border-style: solid;
+
+  /* padding : 10 px, 10 px ,10 px ,10 px; */
+
+  /* 내용물끼리가 아니라 요소끼리 grid를 만들게하기 */
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+
+}
+
+/* 영화 정보 스타일 */
+.contents {
+  align-self: auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin: 10px;
+  /* 
+  칸을 두 열로 나눈다.
+  영화 포스터가 550px 정도이므로 1100 px로 칸 크기를 제한하여,
+  브라우저가 너무 넓을 때 보기 힘든 점을 개선한다. */
+  display: flex;
+  max-width: 1100px;
+  gap: 10px;
+
+}
+
+/* 코멘트 입력칸 가운데 정렬 */
+.reviews {
+  display: grid;
+  /* 수평 및 수직 가운데 정렬 */
+  place-items: center;
+}
+
+.head {
+  background-image: url("https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
+    );
+  /* 이미지 수정할때 편하라고 이미지 링크 뒷편의 괄호를 줄넘김함 따옴표는 하면 에러니까 하지 말 것 */
+  background-repeat: no-repeat;
+  /* 픽셀 위치 지정 */
+  background-position: 50% 0%;
+  /* x축 y축  px % 가능 */
+
 }
