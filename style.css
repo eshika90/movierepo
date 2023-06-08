@@ -1,100 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap");
 /* 박스 크기를 균일하게 유지하게 해주는 속성; border-box : 보더 패딩 다 합친 크기 */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* :root에서 꺼내서 색을 고정해서 꺼내쓸 수 있다(변수 선언처럼) */
 :root {
-    --first-color: white;
-    --second-color: rgb(61 162 136);
+  --first-color: white;
+  --second-color: rgb(61 162 136);
 }
 
 body {
-    background-color: var(--first-color);
-    font-family: 'Lobster Two', cursive;
-    margin: 0;
+  background-color: var(--first-color);
+  font-family: "Lobster Two", cursive;
+  margin: 0;
 }
 /* 사이트 이름 + 검색창부분 */
 header {
-    padding: 0 0 15px 0;
-    display: column;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    /* 안에 요소들 가운데 정렬 */
-    border-bottom: 1px solid var(--second-color);
-    /* 헤더 초록색 선으로 분리 */
+  padding: 0 0 15px 0;
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  /* 안에 요소들 가운데 정렬 */
+  border-bottom: 1px solid var(--second-color);
+  /* 헤더 초록색 선으로 분리 */
 }
 
 /* 검색창 CSS */
 .search {
-    border: 1px solid rgb(240 241 242);
-    background-color: rgb(246 245 247);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-family: 'Lobster', cursive;
+  border: 1px solid rgb(240 241 242);
+  background-color: rgb(246 245 247);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: "Lobster", cursive;
 }
 
 .searchBtn {
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
 }
 
 /* 포스터 div css */
 .main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+header {
+  padding: 15px 0 15px 0;
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  /* 안에 요소들 가운데 정렬 */
+  border-bottom: 1px solid var(--second-color);
+  width: 100%;
+  /* 헤더 초록색 선으로 분리 */
 }
 /* 포스트 묶음 자체 크기 */
 .movie {
-    width: 300px;
-    margin: 1rem;
-    border-radius: 3px;
-    box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
-    /* 그림자 추가 */
-    position: relative;
-    overflow: hidden;
+  width: 300px;
+  margin: 1rem;
+  border-radius: 3px;
+  box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+  /* 그림자 추가 */
+  position: relative;
+  overflow: hidden;
 }
 /* 포스터 이미지 */
 .movie img {
-    width: 100%
+  width: 100%;
 }
 
 /* 영화 제목 */
 .movie-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0 20px;
 }
 
 /* 평점 */
 .movie-info span {
-    background-color: var(--second-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 100px;
-    color: var(--first-color);
-    margin: 0 20px 0 0;
+  background-color: var(--second-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 100px;
+  color: var(--first-color);
+  margin: 0 20px 0 0;
 }
 /* 줄거리 부분*/
 .description {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 1rem;
-    max-height: 100%;
-    background-color: var(--first-color);
-    /* 여기를 안넣으면 줄거리 부분이 뒤에 포스터배경색이랑 똑같아져서 안보이게 된다 */
-    transform: translateY(100%);
-    /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 %는 들어갔다나갔다하는 속도 */
-    transition: transform 0.3s ease-in;
-    /* 줄거리 부분이 내려가는 속도 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  max-height: 100%;
+  background-color: var(--first-color);
+  /* 여기를 안넣으면 줄거리 부분이 뒤에 포스터배경색이랑 똑같아져서 안보이게 된다 */
+  transform: translateY(100%);
+  /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 %는 들어갔다나갔다하는 속도 */
+  transition: transform 0.3s ease-in;
+  /* 줄거리 부분이 내려가는 속도 */
 }
 
 .movie:hover .description {
-    transform:translate(0);
-    /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 이게 없으면 줄거리 아예안나옴 */
+  transform: translate(0);
+  /* 줄거리 부분을 숨기고 마우스를 가져다 대면 보이게끔 하는 설정 이게 없으면 줄거리 아예안나옴 */
 }

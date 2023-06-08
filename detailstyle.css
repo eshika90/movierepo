@@ -32,11 +32,6 @@ body {
 }
 
 /* 영화포스터+카드안에 사진, overview etc */
-.contents {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
 
 /* 영화 포스터 */
 .movieposter > img {
@@ -106,4 +101,56 @@ form {
   margin-top: 100px;
   padding: 20px;
   border-radius: 4px;
+}
+/* // 댓글 스타일 */
+.comments {
+  border-style: solid;
+
+  /* padding : 10 px, 10 px ,10 px ,10 px; */
+
+  /* 내용물끼리가 아니라 요소끼리 grid를 만들게하기 */
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+}
+
+/* 영화 정보 스타일 */
+.contents {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin: 10px;
+  /* 
+  칸을 두 열로 나눈다.
+  영화 포스터가 550px 정도이므로 1100 px로 칸 크기를 제한하여,
+  브라우저가 너무 넓을 때 보기 힘든 점을 개선한다. */
+  display: flex;
+  max-width: 1100px;
+  gap: 10px;
+}
+
+/* 코멘트 입력칸 가운데 정렬 */
+.reviews {
+  display: grid;
+  /* 수평 및 수직 가운데 정렬 */
+  place-items: center;
+}
+
+.head {
+  background-image: url("https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg");
+  /* 이미지 수정할때 편하라고 이미지 링크 뒷편의 괄호를 줄넘김함 따옴표는 하면 에러니까 하지 말 것 */
+  background-repeat: no-repeat;
+  /* 픽셀 위치 지정 */
+  background-position: 50% 0%;
+  /* x축 y축  px % 가능 */
 }

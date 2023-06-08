@@ -80,7 +80,7 @@ const updateReviewList = () => {
         .map((el, index) =>
           el.isUpdate
             ? `
-        <div>
+        <div class="comments">
           <h5>NAME ${el.title}</h5>
           <p>COMMENTS ${el.contents}</p>
           <button id="edit_submit" name="${index}" >확인</button>
@@ -90,7 +90,7 @@ const updateReviewList = () => {
         
           `
             : `
-        <div>
+        <div class="comments">
           <h5>NAME ${el.title}</h5>
           <p>COMMENTS ${el.contents}</p>
           <button class="review_update" name="${index}">수정</button>
