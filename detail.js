@@ -12,10 +12,14 @@ fetch(movieURL)
     const { title, poster_path, overview, vote_average } = data;
     const roundedVote = vote_average.toFixed(1);
     // 가져온 정보로 HTML 요소 채우기
-    document.getElementById("movie").innerHTML = `<img src="${IMG_URL + poster_path}" alt="${title}">`;
+    document.getElementById("movie").innerHTML = `<img src="${
+      IMG_URL + poster_path
+    }" alt="${title}">`;
     document.getElementById("title").textContent = title;
     document.getElementById("overview").textContent = overview;
-    document.getElementById("vote").textContent = `Vote Average: ${roundedVote}`;
+    document.getElementById(
+      "vote"
+    ).textContent = `Vote Average ⭐${roundedVote}`;
   });
 
 // 받아온 데이터를 보여주기 위한 함수
@@ -73,8 +77,8 @@ const updateReviewList = () => {
           el.isUpdate
             ? `
           <div>
-          <span><작성자></span><div>${el.title}</div>
-          <span><리뷰내용></span><textarea id="edit_text">${el.contents}</textarea>
+          <span>작성자</span><div>${el.title}</div>
+          <span>리뷰내용</span><textarea id="edit_text">${el.contents}</textarea>
           <button id="edit_submit" name="${index}" >확인</button>
           <button id="edit_cancel" name="${index}" >취소</button>
           <br/>
@@ -82,8 +86,8 @@ const updateReviewList = () => {
           `
             : `
         <div>
-          <span><작성자></span><div>${el.title}</div>
-          <span><리뷰내용></span><div>${el.contents}</div>
+          <span>작성자</span><div>${el.title}</div>
+          <span>리뷰내용</span><div>${el.contents}</div>
           <button class="review_update" name="${index}">수정</button>
           <button class="review_delete" name="${index}">삭제</button>
           <br/>
@@ -148,7 +152,8 @@ const deleteLocalStorage = () => {};
 const checkPassword = (value) => {
   const target = JSON.parse(localStorage.getItem(movieId));
   // 비밀번호 틀렸을때
-  if (value !== target[selectedReviewIndex].password) return alert("비밀번호를 확인해주세요");
+  if (value !== target[selectedReviewIndex].password)
+    return alert("비밀번호를 확인해주세요");
   closeModal();
   // 삭제
   if (isDeleteModal) {
@@ -158,6 +163,7 @@ const checkPassword = (value) => {
     updateReviewList();
     modalInput.value = "";
     alert("삭제되었습니다");
+    window.location.reload();
   }
   // 수정
   else {

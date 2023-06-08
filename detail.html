@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Movie Detail</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=IBM+Plex+Sans+KR&family=Lobster&family=Nanum+Myeongjo&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-    <script src="detail.js" type="module" defer></script>
-  </head>
 
-  <body>
-    <div class="modal">
-      <div>
-        <h5>비밀번호를 입력해주세요</h5>
-        <input />
-        <button class="submit">확인</button>
-        <button class="cancel">취소</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Movie Detail</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Gowun+Batang&family=IBM+Plex+Sans+KR&family=Lobster&family=Nanum+Myeongjo&family=Nanum+Pen+Script&display=swap"
+    rel="stylesheet">
+  <script src="detail.js" type="module" defer></script>
+</head>
+
+<body>
+  <div class="modal">
+    <div>
+      <h5>비밀번호를 입력해주세요</h5>
+      <input />
+      <button class="submit">확인</button>
+      <button class="cancel">취소</button>
     </div>
-    <header class="head">
-      <h1 id="main">Find Your Movies</h1>
-    </header>
-    <main>
-      <div class="contents">
-        <div id="movie"></div>
-        <img src="" alt="" />
-        <h2 id="title">title</h2>
-        <p id="overview">overview</p>
-        <p id="vote">Vote Average: 9.8</p>
+  </div>
+  <header class="head">
+    <h1 id="main" onclick="window.location.href='index.html'">Find Your Movies</h1>
+  </header>
+  <main>
+    <div class="contents">
+      <div id="movie"></div>
+      <img src="" alt="" />
+      <h1 id="title">title</h1>
+      <p id="vote">Vote Average: 9.8</p>
+      <p id="overview">overview</p>
+    </div>
+    <div class="reviews">
+      <form>
+        <label>작성자</label>: <input name="title" />
+        <label>리뷰</label>: <textarea name="contents"></textarea>
+        <label>확인 비밀번호</label>: <input name="password" />
+        <button type="button" class="submit">확인</button>
+      </form>
+
+      <div id="review_list">
       </div>
-      <div class="reviews">
-        <form>
-          <label>작성자</label>: <input name="title"/>
-          <label>리뷰</label>: <textarea name="contents"></textarea>
-          <label>확인 비밀번호</label>: <input  name="password"/>
-          <button type="button" class="submit">확인</button>
-        </form>
-    
-        <div id="review_list">
-        </div>
-       
-      </div>
-      </div>
-    </main>
-  </body>
+
+    </div>
+    </div>
+  </main>
+</body>
+
 </html>

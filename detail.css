@@ -1,0 +1,49 @@
+#movie {
+  padding: 100px 0px 0px 230px;
+  float: left;
+}
+
+#title {
+  margin-top: 90px;
+}
+
+#vote {
+  margin-top: 50;
+  font-size: 17px;
+}
+
+#overview {
+  margin-top: 35px 500px;
+  font-size: 20px;
+}
+
+#title,
+#vote,
+#overview {
+  padding-left: 800px;
+  margin-left: 10px; /* 이미지와의 간격을 조절할 수 있습니다. 필요에 따라 값을 조정해주세요. */
+}
+
+/* .reviews {
+  position: absolute;
+  top: 1000px;
+  bottom: 0px;
+} */
+
+/* 부모 요소 */
+.main {
+  position: relative;
+}
+
+/* .reviews 요소 */
+.reviews {
+  position: absolute;
+  top: 1000px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.contents {
+  padding-bottom: 800px; /* 원하는 아래쪽 여백 크기를 설정하세요 */
+}

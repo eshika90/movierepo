@@ -76,6 +76,6 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-function Title() {
-  window.location.reload();
+function newPage(movieId) {
+  window.open(`detail.html?id=${movieId}`);
 }
