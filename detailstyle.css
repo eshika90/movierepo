@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap");
+
+/* 박스 크기를 균일하게 유지하게 해주는 속성; border-box : 보더 패딩 다 합친 크기 */
+* {
+  box-sizing: border-box;
+}
+
+/* :root에서 꺼내서 색을 고정해서 꺼내쓸 수 있다(변수 선언처럼) */
+:root {
+  --first-color: white;
+  --second-color: rgb(61 162 136);
+}
+
+header {
+  padding: 15px 0 15px 0;
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  /* 안에 요소들 가운데 정렬 */
+  border-bottom: 1px solid var(--second-color);
+  width: 100%;
+  /* 헤더 초록색 선으로 분리 */
+}
+
+body {
+  background-color: var(--first-color);
+  font-family: "Lobster Two", cursive;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 영화포스터+카드안에 사진, overview etc */
+
+/* 영화 포스터 */
+.movieposter>img {
+  border-radius: 5px;
+  margin-right: 20px;
+  box-shadow: 0.2px 4px 5px rgb(0, 0, 0);
+  max-width: 100%;
+  height: auto;
+}
+
+/* 사진 + overview + etc */
+.moviewrap {
+  text-align: left;
+  margin-right: 20px;
+}
+
+/* 부트스트랩 카드 */
+.card {
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 카드 안 이미지 */
+.backimg {
+  text-align: center;
+}
+
+/* 부트스트랩 카드 안 텍스트쪽*/
+.card-body {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+form {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 520px;
+}
+
+.row {
+  width: 100%;
+}
+
+/* 리뷰 */
+.review_list {
+
+  padding: 0 0 0 40px;
+  text-align: left;
+  margin: 20px auto;
+  font-size: 20px;
+
+  /* 텍스트 넘침 해결 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+
+
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+}
+
+
+
+/* 모달 창 */
+.modal div {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* // 댓글 스타일 */
+.comments {
+  border-style: solid;
+
+  /* padding : 10 px, 10 px ,10 px ,10 px; */
+
+  /* 내용물끼리가 아니라 요소끼리 grid를 만들게하기 */
+  display: inline-grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+}
+
+
+.myBtn {
+  background-color: skyblue;
+  color: white;
+  border: none;
+
+  width: 100px;
+  height: 30px;
+}
+
+
+/* 영화 정보 스타일 */
+.contents {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin: 10px;
+  /* 
+  칸을 두 열로 나눈다.
+  영화 포스터가 550px 정도이므로 1100 px로 칸 크기를 제한하여,
+  브라우저가 너무 넓을 때 보기 힘든 점을 개선한다. */
+  display: flex;
+  max-width: 1100px;
+  gap: 10px;
+}
+
+
+/* 코멘트 입력칸 가운데 정렬 */
+.reviews {
+  display: grid;
+  /* 수평 및 수직 가운데 정렬 */
+  place-items: center;
+}
+
+.head {
+  background-image: url("https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg");
+  /* 이미지 수정할때 편하라고 이미지 링크 뒷편의 괄호를 줄넘김함 따옴표는 하면 에러니까 하지 말 것 */
+  background-repeat: no-repeat;
+  /* 픽셀 위치 지정 */
+  background-position: 50% 0%;
+  /* x축 y축  px % 가능 */
+}
