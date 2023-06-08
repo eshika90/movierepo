@@ -50,6 +50,7 @@ function fetchMovieDetails(movie) {
 // dom
 const reviewForm = document.querySelector(".reviews form");
 const submitButton = document.querySelector(".reviews .submit");
+const formInput = document.querySelectorAll(".form-control");
 const reviewList = document.getElementById("review_list");
 const modalEl = document.querySelector(".modal");
 const modalSubmitBtn = document.querySelector(".modal .submit");
@@ -71,10 +72,10 @@ const createLocalStorage = data => {
 // review list 업데이트
 const updateReviewList = () => {
   const newData = JSON.parse(localStorage.getItem(movieId) || "[]");
+  // ${newData.length > 0 && <h2>Comments</h2>}
 
-  if (newData.length === 0) return;
+  if (newData.length === 0) return (reviewList.innerHTML = "");
   reviewList.innerHTML = `
-      <h2>Comments</h2>
       ${newData
         .map((el, index) =>
           el.isUpdate
@@ -182,16 +183,21 @@ modalCancelBtn.addEventListener("click", e => {
   closeModal();
   modalInput.value = "";
 });
-submitButton.addEventListener("click", () => {
+reviewForm.addEventListener("submit", () => {
   event.preventDefault();
   const data = new FormData(reviewForm);
   const formDataObj = {};
   data.forEach((value, key) => (formDataObj[key] = value));
 
   createLocalStorage(formDataObj);
+  console.log(formInput, "formInput");
+  formInput.forEach(el => {
+    el.value = "";
+  });
   // 댓글 달고 새로고침되게끔 코드 추가
-  location.reload();
+  // location.reload();
 });
+submitButton.addEventListener("click", () => {});
 
 const reviewsContents = localStorage.getItem("movieId");
 
