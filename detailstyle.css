@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&display=swap");
+/* 박스 크기를 균일하게 유지하게 해주는 속성; border-box : 보더 패딩 다 합친 크기 */
+* {
+  box-sizing: border-box;
+}
+
+/* :root에서 꺼내서 색을 고정해서 꺼내쓸 수 있다(변수 선언처럼) */
+:root {
+  --first-color: white;
+  --second-color: rgb(61 162 136);
+}
+
+header {
+  padding: 15px 0 15px 0;
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  /* 안에 요소들 가운데 정렬 */
+  border-bottom: 1px solid var(--second-color);
+  width: 100%;
+  /* 헤더 초록색 선으로 분리 */
+}
+
+body {
+  background-color: var(--first-color);
+  font-family: "Lobster Two", cursive;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 영화포스터+카드안에 사진, overview etc */
+.contents {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 영화 포스터 */
+.movieposter > img {
+  border-radius: 5px;
+  margin-right: 20px;
+  box-shadow: 0.2px 4px 5px rgb(0, 0, 0);
+  max-width: 100%;
+  height: auto;
+}
+/* 사진 + overview + etc */
+.moviewrap {
+  text-align: left;
+  margin-right: 20px;
+}
+
+/* 부트스트랩 카드 */
+.card {
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 카드 안 이미지 */
+.backimg {
+  text-align: center;
+}
+
+/* 부트스트랩 카드 안 텍스트쪽*/
+.card-body {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+form {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 520px;
+}
+
+.row {
+  width: 100%;
+}
+
+/* 리뷰 */
+.review_list {
+  max-width: 550px;
+  padding: 0 0 0 40px;
+  text-align: left;
+  margin: 20px auto;
+  font-size: 20px;
+  overflow-y: auto;
+  display: grid;
+}
+
+/* 모달 창 */
+.modal div {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius: 4px;
+}
