@@ -105,12 +105,14 @@ form {
 /* // 댓글 스타일 */
 .comments {
   border-style: solid;
+  /* width: 300px; */
+  display: flex;
+  /* display: inline-grid; */
+  /* grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px; */
 
-  /* padding : 10 px, 10 px ,10 px ,10 px; */
-
-  /* 내용물끼리가 아니라 요소끼리 grid를 만들게하기 */
   display: inline-grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -153,4 +155,11 @@ form {
   /* 픽셀 위치 지정 */
   background-position: 50% 0%;
   /* x축 y축  px % 가능 */
+}
+.myBtn {
+  background-color: skyblue;
+  color: white;
+  border: none;
+  width: 100px;
+  height: 30px;
 }

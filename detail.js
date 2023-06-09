@@ -81,20 +81,28 @@ const updateReviewList = () => {
           el.isUpdate
             ? `
         <div class="comments">
-          <h5>NAME ${el.title}</h5>
-          <p>COMMENTS ${el.contents}</p>
-          <button id="edit_submit" name="${index}" >확인</button>
-          <button id="edit_cancel" name="${index}" >취소</button>
+          <h5>NAME   <input  id="edit_input_name" defaultValue=${el.title}></input></h5>
+        
+          <p>COMMENTS</p>
+          <input id="edit_input_comments" defaultValue=${el.title}></input><br/>
+          <div>  
+            <button class="edit_submit myBtn" name="${index}" >확인</button>
+            <button class="edit_cancel myBtn" name="${index}" >취소</button>
+          </div>
         </div>
           
         
           `
             : `
         <div class="comments">
-          <h5>NAME ${el.title}</h5>
-          <p>COMMENTS ${el.contents}</p>
-          <button class="review_update" name="${index}">수정</button>
-          <button class="review_delete" name="${index}">삭제</button>
+        <h5>NAME  ${el.title}</h5>
+        <p>COMMENTS<br/> ${el.contents}</p>
+        <div>  
+
+        <button class="review_update myBtn" name="${index}">수정</button>
+        <button class="review_delete myBtn" name="${index}">삭제</button>
+      </div>
+
         </div>
         `
         )
@@ -102,9 +110,10 @@ const updateReviewList = () => {
     `;
   const reviewUpdateBtn = document.querySelectorAll(".review_update");
   const reviewDeleteBtn = document.querySelectorAll(".review_delete");
-  const editInput = document.getElementById("edit_text");
-  const editSubmit = document.getElementById("edit_submit");
-  const editCancel = document.getElementById("edit_cancel");
+  const editName = document.getElementById("edit_input_name");
+  const editComments = document.getElementById("edit_input_comments");
+  const editSubmit = document.querySelector(".edit_submit");
+  const editCancel = document.querySelector(".edit_cancel");
 
   if (editCancel) {
     editCancel.addEventListener("click", e => {
@@ -121,7 +130,8 @@ const updateReviewList = () => {
       const index = e.target.name;
       const target = JSON.parse(localStorage.getItem(movieId));
       target[index].isUpdate = false;
-      target[index].contents = editInput.value;
+      target[index].contents = editComments.value;
+      target[index].title = editName.value;
 
       localStorage.setItem(movieId, JSON.stringify(target));
       updateReviewList();
@@ -187,10 +197,20 @@ reviewForm.addEventListener("submit", () => {
   event.preventDefault();
   const data = new FormData(reviewForm);
   const formDataObj = {};
-  data.forEach((value, key) => (formDataObj[key] = value));
+  let validationCheck = [];
+
+  data.forEach((value, key) => {
+    if (value === "") return validationCheck.push(key);
+    formDataObj[key] = value;
+  });
+
+  if (validationCheck.length > 0)
+    return alert(`${validationCheck.map(el => el + " ").join("")}를 입력해주세요.`);
 
   createLocalStorage(formDataObj);
   console.log(formInput, "formInput");
+  if (formInput.length < 3) return alert("모두 입력해주세요");
+
   formInput.forEach(el => {
     el.value = "";
   });
